@@ -10,22 +10,22 @@ export default class App extends Component {
     super(props, context);
     
     this.state = {
-      data: 'React app with axios'
+      api_message: 'Not connected yet',
+      mongo_connection: 'Undefined'
     };
   }
   
   componentDidMount() {
-    const apiUrl =  'http://localhost:8080';
-    
-    axios.get(apiUrl)
+    axios.get(process.env.REACT_APP_API_ADDRESS)
       .then(res => {
         this.setState({
-          data: res.data.message
+          api_message: res.data.message,
+          mongo_connection: res.data.mongo_connection
         });
       })
       .catch(error => {
         this.setState({
-          data: "Axios " + error.toString()
+          api_message: "Axios " + error.toString()
         });
         console.log(error);
       })
@@ -36,10 +36,10 @@ export default class App extends Component {
       <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
         <div>
-          Node.js API response:
-          <h3>
-            {this.state.data}
-          </h3>
+          Node.js API response: - <b>{this.state.api_message}</b>
+        </div>
+        <div>
+          MongoDB connection check: - <b>{this.state.mongo_connection ? "" : "not"} connected</b>
         </div>
       </div>
     );
