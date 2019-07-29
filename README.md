@@ -6,7 +6,7 @@ current project is framework that consists of React.js app, Node.js API with con
 
 Start app:
 ```
-cp api/app/.env.dist api/app/.env
+cp .env.dist .env
 ```
 ```
 docker-compose up
